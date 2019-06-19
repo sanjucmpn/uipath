@@ -51,7 +51,7 @@
   <Flowchart sap:VirtualizedContainerService.HintSize="614,636" sap2010:WorkflowViewState.IdRef="Flowchart_1">
     <Flowchart.Variables>
       <Variable x:TypeArguments="scg:List(snm:MailMessage)" Name="mail" />
-      <Variable x:TypeArguments="sd:DataTable" Name="Edata" />
+      <Variable x:TypeArguments="sd:DataColumn" Name="Edata" />
     </Flowchart.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -71,10 +71,10 @@
           <av:Size x:Key="ShapeSize">200,51</av:Size>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="MailSend" sap:VirtualizedContainerService.HintSize="753,2217" sap2010:WorkflowViewState.IdRef="Sequence_2">
+      <Sequence DisplayName="MailSend" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Sequence_2">
         <Sequence.Variables>
           <Variable x:TypeArguments="s:String[]" Name="filepath" />
-          <Variable x:TypeArguments="sd:DataTable" Name="Edata" />
+          <Variable x:TypeArguments="sd:DataTable" Name="Emdata" />
           <Variable x:TypeArguments="sd:DataTable" Name="Format_Datable" />
         </Sequence.Variables>
         <sap:WorkflowViewStateService.ViewState>
@@ -82,7 +82,7 @@
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
-        <ui:ReadRange AddHeaders="True" DataTable="[Edata]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="731,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="EmployeeDetails.xlsx">
+        <ui:ReadRange AddHeaders="True" DataTable="[Emdata]" DisplayName="Read Range" sap:VirtualizedContainerService.HintSize="731,87" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="EmployeeDetails.xlsx">
           <ui:ReadRange.Range>
             <InArgument x:TypeArguments="x:String">
               <Literal x:TypeArguments="x:String" Value="" />
@@ -96,7 +96,7 @@
             </InArgument>
           </ui:ReadRange.Range>
         </ui:ReadRange>
-        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Edata]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="731,1839" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
+        <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Emdata]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="731,1839" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
           <ui:ForEachRow.Body>
             <ActivityAction x:TypeArguments="sd:DataRow">
               <ActivityAction.Argument>
@@ -108,7 +108,7 @@
                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                   </scg:Dictionary>
                 </sap:WorkflowViewStateService.ViewState>
-                <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="679,1072" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Edata.Columns]">
+                <ui:ForEach x:TypeArguments="sd:DataColumn" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="679,1072" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[Emdata.Columns]">
                   <ui:ForEach.Body>
                     <ActivityAction x:TypeArguments="sd:DataColumn">
                       <ActivityAction.Argument>
@@ -210,7 +210,7 @@
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
                 </ui:SendOutlookMail>
-                <ui:WriteCell Cell="[&quot;Q&quot;+Cstr(Edata.Rows.IndexOf(row)+2)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="679,115" sap2010:WorkflowViewState.IdRef="WriteCell_2" SheetName="Sheet1" Text="[Date.Now.ToShortDateString]" WorkbookPath="EmployeeDetails.xlsx" />
+                <ui:WriteCell Cell="[&quot;Q&quot;+Cstr(Emdata.Rows.IndexOf(row)+2)]" DisplayName="Write Cell" sap:VirtualizedContainerService.HintSize="679,115" sap2010:WorkflowViewState.IdRef="WriteCell_2" SheetName="Sheet1" Text="[Date.Now.ToShortDateString]" WorkbookPath="EmployeeDetails.xlsx" />
               </Sequence>
             </ActivityAction>
           </ui:ForEachRow.Body>
@@ -225,7 +225,7 @@
           <av:PointCollection x:Key="ConnectorLocation">130,195.5 130,244.5</av:PointCollection>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
-      <Sequence DisplayName="CheckMail" sap:VirtualizedContainerService.HintSize="200,51" sap2010:WorkflowViewState.IdRef="Sequence_7">
+      <Sequence DisplayName="CheckMail" sap:VirtualizedContainerService.HintSize="524,1322" sap2010:WorkflowViewState.IdRef="Sequence_7">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -337,7 +337,7 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="[Edata]" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="314,247" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
+            <ui:ForEachRow CurrentIndex="{x:Null}" DataTable="{x:Null}" DisplayName="For Each Row" sap:VirtualizedContainerService.HintSize="314,247" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
